@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/drawer_layout"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+
+
+   <android.support.v4.view.ViewPager
+       android:id="@+id/vp_tab"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:layout_weight="1">
+   </android.support.v4.view.ViewPager>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="#dedede"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="72dp"
+        android:gravity="center_vertical"
+        >
+        <LinearLayout
+            android:id="@+id/ll_message"
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+           >
+            <ImageView
+                android:id="@+id/iv_message"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:src="@mipmap/message_default"/>
+            <TextView
+                android:textColor="#444444"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="信息"/>
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/ll_contact"
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            >
+            <ImageView
+                android:id="@+id/iv_contact"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:src="@mipmap/contact_default"/>
+            <TextView
+                android:textColor="#444444"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="通讯录"/>
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/ll_discover"
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            >
+            <ImageView
+                android:id="@+id/iv_discover"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:src="@mipmap/discorver_default"/>
+            <TextView
+                android:textColor="#444444"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="发现"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_my"
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            >
+            <ImageView
+                android:id="@+id/iv_my"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:src="@mipmap/my_default"/>
+            <TextView
+                android:textColor="#444444"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="我的"/>
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+    </LinearLayout>
+
+    <android.support.design.widget.NavigationView
+        android:id="@+id/nav_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        app:menu="@menu/nav_menu"
+        app:headerLayout="@layout/nav_header"/>
+
+</android.support.v4.widget.DrawerLayout>
