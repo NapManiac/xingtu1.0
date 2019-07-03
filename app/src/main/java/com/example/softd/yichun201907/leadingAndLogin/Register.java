@@ -77,14 +77,11 @@ public class Register extends BaseActivity {
         } else {
             if (!RegexUtils.checkAccount(accountString)) {
                 toastLong("账户名需要6字符以上的字母数字下划线");
-            }
-            if (!RegexUtils.checkPassword(passwordString)) {
+            } else if (!RegexUtils.checkPassword(passwordString)) {
                 toastLong("账户名 需要6字符以上");
-            }
-            if (!RegexUtils.checkEmail(emailString)) {
+            } else if (!RegexUtils.checkEmail(emailString)) {
                 toastLong("请填写正确的邮箱");
-            }
-            if (!RegexUtils.checkPhone(phoneString)) {
+            } else if (!RegexUtils.checkPhone(phoneString)) {
                 toastLong("请填写正确的手机号");
             }
         }

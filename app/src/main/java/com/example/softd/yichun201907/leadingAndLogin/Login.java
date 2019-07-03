@@ -4,18 +4,28 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.widget.AppCompatCheckBox;
+import android.support.v7.widget.AppCompatTextView;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.example.softd.yichun201907.DB.Account;
 import com.example.softd.yichun201907.R;
 import com.example.softd.yichun201907.base.BaseActivity;
 import com.example.softd.yichun201907.home.MainActivity;
+
+import org.litepal.LitePal;
+
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class Login extends BaseActivity {
+
+    static int LOGIN_SUCCESS = 1;
+    static int LOGIN_PASSWORD_ERROR = 2;
+    static int LOGIN_NO_REGISTER = 3;
 
     @BindView(R.id.username)
     EditText username;
@@ -27,6 +37,8 @@ public class Login extends BaseActivity {
     AppCompatCheckBox checkAuto;
     @BindView(R.id.btn_login)
     Button btnLogin;
+    @BindView(R.id.text_register)
+    AppCompatTextView textRegister;
 
     private SharedPreferences pref;
     private SharedPreferences.Editor editor;
@@ -37,6 +49,22 @@ public class Login extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
+
+        LitePal.getDatabase();
+
+        Account account1 = new Account();
+        account1.setName("fu");
+        account1.setPassword("123456");
+        account1.save();
+
+
+        //查看数据库中的账号
+//        List<Account> allAccount = LitePal.findAll(Account.class);
+//        for (Account account: allAccount) {
+//            log(account.getName());
+//            log(account.getPassword());
+//        }
+
 
         pref = PreferenceManager.getDefaultSharedPreferences(this);
         boolean auto_login = pref.getBoolean("auto_login", false);
@@ -50,7 +78,7 @@ public class Login extends BaseActivity {
             checkRemerber.setChecked(true);
 
         }
-        if(auto_login) {
+        if (auto_login) {
             toastLong("自动登陆");
             checkAuto.setChecked(true);
         }
@@ -75,12 +103,12 @@ public class Login extends BaseActivity {
     public void onViewClicked() {
         String account = username.getText().toString();
         String password = userpassword.getText().toString();
-        // 如果账号是admin且密码是123456，就认为登录成功
-        if (account.equals("admin") && password.equals("123456")) {
+        int result = isLogin(account, password);
+        if (result == LOGIN_SUCCESS) {
             editor = pref.edit();
             if (checkRemerber.isChecked()) { // 检查复选框是否被选中
                 editor.putBoolean("remember_password", true);
-                if(checkAuto.isChecked()) {
+                if (checkAuto.isChecked()) {
                     editor.putBoolean("auto_login", true);
                 } else {
                     editor.putBoolean("auto_login", false);
@@ -92,9 +120,30 @@ public class Login extends BaseActivity {
             }
             editor.apply();
             goNextActivity(MainActivity.class);
+            toastShort("登录成功");
             finish();
-        } else {
+        } else if (result == LOGIN_PASSWORD_ERROR) {
             toastLong("用户名或密码错误");
+        } else {
+            toastLong("账号未注册");
         }
+    }
+
+    public int isLogin(String name, String password) {
+        List<Account> account = LitePal.select("*")
+                .where("name = ?", name)
+                .find(Account.class);
+        if (account.size() == 0) {
+            return LOGIN_NO_REGISTER;
+        } else if (account.get(0).getPassword().equals(password)) {
+            return LOGIN_SUCCESS;
+        } else {
+            return LOGIN_PASSWORD_ERROR;
+        }
+    }
+
+    @OnClick(R.id.text_register)
+    public void onRegViewClicked() {
+        goNextActivity(Register.class);
     }
 }
