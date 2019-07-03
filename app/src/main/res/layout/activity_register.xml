@@ -33,9 +33,9 @@
 
     <EditText
         android:id="@+id/et_account"
-        android:layout_width="326dp"
+        android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_marginLeft="25dp"
+        android:layout_marginHorizontal="25dp"
         android:layout_marginTop="25dp"
         android:background="@drawable/shape_register_edit"
         android:drawableLeft="@mipmap/usericon_reg"
@@ -48,9 +48,9 @@
 
     <EditText
         android:id="@+id/et_password"
-        android:layout_width="326dp"
+        android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_marginLeft="25dp"
+        android:layout_marginHorizontal="25dp"
         android:layout_marginTop="25dp"
         android:background="@drawable/shape_register_edit"
         android:drawableLeft="@mipmap/userpass_reg"
@@ -64,9 +64,9 @@
 
     <EditText
         android:id="@+id/et_email"
-        android:layout_width="326dp"
+        android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_marginLeft="25dp"
+        android:layout_marginHorizontal="25dp"
         android:layout_marginTop="25dp"
         android:background="@drawable/shape_register_edit"
         android:drawableLeft="@mipmap/nav_mail"
@@ -79,9 +79,9 @@
 
     <EditText
         android:id="@+id/et_phone"
-        android:layout_width="326dp"
+        android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_marginLeft="25dp"
+        android:layout_marginHorizontal="25dp"
         android:layout_marginTop="25dp"
         android:background="@drawable/shape_register_edit"
         android:drawableLeft="@mipmap/nav_call"
@@ -93,6 +93,7 @@
         android:singleLine="true" />
 
     <Button
+
         android:id="@+id/bt_register"
         android:layout_width="match_parent"
         android:layout_height="55dp"

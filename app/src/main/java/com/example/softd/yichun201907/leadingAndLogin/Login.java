@@ -1,6 +1,7 @@
 package com.example.softd.yichun201907.leadingAndLogin;
 
 import android.content.SharedPreferences;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.widget.AppCompatCheckBox;
@@ -9,11 +10,13 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.example.softd.yichun201907.DB.Account;
+import com.example.softd.yichun201907.DB.UserInfo;
 import com.example.softd.yichun201907.R;
 import com.example.softd.yichun201907.base.BaseActivity;
 import com.example.softd.yichun201907.home.MainActivity;
 
 import org.litepal.LitePal;
+import org.litepal.tablemanager.Connector;
 
 import java.util.List;
 
@@ -50,20 +53,9 @@ public class Login extends BaseActivity {
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
 
-        LitePal.getDatabase();
+//        dropTable();
+//        addAdmin();
 
-        Account account1 = new Account();
-        account1.setName("fu");
-        account1.setPassword("123456");
-        account1.save();
-
-
-        //查看数据库中的账号
-//        List<Account> allAccount = LitePal.findAll(Account.class);
-//        for (Account account: allAccount) {
-//            log(account.getName());
-//            log(account.getPassword());
-//        }
 
 
         pref = PreferenceManager.getDefaultSharedPreferences(this);
@@ -146,4 +138,26 @@ public class Login extends BaseActivity {
     public void onRegViewClicked() {
         goNextActivity(Register.class);
     }
+
+    //删除所有数据
+    public void dropTable() {
+        LitePal.deleteAll(Account.class);
+        LitePal.deleteAll(UserInfo.class);
+    }
+
+    //添加管理员
+    public void addAdmin() {
+
+        Account account1 = new Account();
+        account1.setName("111111");
+        account1.setPassword("111111");
+        account1.save();
+
+        UserInfo userInfo = new UserInfo();
+        userInfo.setName("111111");
+        userInfo.setTel("15297828708");
+        userInfo.setEmail("1394327107@qq.com");
+        userInfo.save();
+    }
+
 }
