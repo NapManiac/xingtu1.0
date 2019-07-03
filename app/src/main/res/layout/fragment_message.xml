@@ -13,9 +13,5 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:text="信息" />
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="信息页面的Button"/>
 
 </LinearLayout>
