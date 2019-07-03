@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@mipmap/loginback"
+    android:orientation="vertical"
+    android:theme="@android:style/Theme.NoTitleBar"
+  >
+
+
+    <LinearLayout
+
+        android:id="@+id/iv_head"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:layout_marginTop="30dp"
+        android:gravity="center"
+        android:scaleType="fitStart">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="用户注册"
+            android:textColor="#fff"
+            android:textSize="25dp" />
+
+
+    </LinearLayout>
+
+
+    <EditText
+        android:id="@+id/et_account"
+        android:layout_width="326dp"
+        android:layout_height="50dp"
+        android:layout_marginLeft="25dp"
+        android:layout_marginTop="25dp"
+        android:background="@drawable/shape_register_edit"
+        android:drawableLeft="@mipmap/usericon_reg"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:hint="|请输入用户名"
+        android:marqueeRepeatLimit="marquee_forever"
+        android:scrollHorizontally="true"
+        android:singleLine="true" />
+
+    <EditText
+        android:id="@+id/et_password"
+        android:layout_width="326dp"
+        android:layout_height="50dp"
+        android:layout_marginLeft="25dp"
+        android:layout_marginTop="25dp"
+        android:background="@drawable/shape_register_edit"
+        android:drawableLeft="@mipmap/userpass_reg"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:hint="|请输入密码"
+        android:inputType="textPassword"
+        android:marqueeRepeatLimit="marquee_forever"
+        android:scrollHorizontally="true"
+        android:singleLine="true" />
+
+    <EditText
+        android:id="@+id/et_email"
+        android:layout_width="326dp"
+        android:layout_height="50dp"
+        android:layout_marginLeft="25dp"
+        android:layout_marginTop="25dp"
+        android:background="@drawable/shape_register_edit"
+        android:drawableLeft="@mipmap/nav_mail"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:hint="|请输入邮箱"
+        android:marqueeRepeatLimit="marquee_forever"
+        android:scrollHorizontally="true"
+        android:singleLine="true" />
+
+    <EditText
+        android:id="@+id/et_phone"
+        android:layout_width="326dp"
+        android:layout_height="50dp"
+        android:layout_marginLeft="25dp"
+        android:layout_marginTop="25dp"
+        android:background="@drawable/shape_register_edit"
+        android:drawableLeft="@mipmap/nav_call"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:hint="|请输入手机号码"
+        android:marqueeRepeatLimit="marquee_forever"
+        android:scrollHorizontally="true"
+        android:singleLine="true" />
+
+    <Button
+        android:id="@+id/bt_register"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginHorizontal="80dp"
+        android:layout_marginTop="40dp"
+        android:background="@color/xui_btn_green_normal_color"
+        android:text="注     册"
+        android:textColor="@android:color/white"
+        android:textSize="18sp"
+        tools:layout_editor_absoluteX="54dp"
+        tools:layout_editor_absoluteY="48dp" />
+
+</LinearLayout>
