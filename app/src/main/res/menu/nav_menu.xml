@@ -3,28 +3,28 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_call"
-            android:icon="@mipmap/nav_call"
-            android:title="Call" />
+            android:icon="@mipmap/like_icon"
+            android:title="收藏" />
 
         <item
             android:id="@+id/nav_friends"
-            android:icon="@mipmap/nav_friends"
-            android:title="Friends" />
+            android:icon="@mipmap/settings_icon"
+            android:title="设置" />
 
         <item
             android:id="@+id/nav_location"
-            android:icon="@mipmap/nav_location"
-            android:title="Location" />
+            android:icon="@mipmap/id_icon"
+            android:title="信息" />
 
         <item
             android:id="@+id/nav_mail"
             android:icon="@mipmap/nav_mail"
-            android:title="Mail" />
+            android:title="邮箱" />
 
         <item
             android:id="@+id/nav_task"
             android:icon="@mipmap/nav_task"
-            android:title="Task" />
+            android:title="待办" />
 
     </group>
 

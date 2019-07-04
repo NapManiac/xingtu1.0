@@ -41,12 +41,12 @@
                     android:id="@+id/iv_message"
                     android:layout_width="36dp"
                     android:layout_height="36dp"
-                    android:src="@mipmap/message_default" />
+                    android:src="@mipmap/task_nomal" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="信息"
+                    android:text="待办"
                     android:textColor="#999" />
             </LinearLayout>
 
@@ -62,12 +62,12 @@
                     android:id="@+id/iv_contact"
                     android:layout_width="36dp"
                     android:layout_height="36dp"
-                    android:src="@mipmap/contact_default" />
+                    android:src="@mipmap/plant_nomal" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="通讯录"
+                    android:text="拾星"
                     android:textColor="#999" />
             </LinearLayout>
 
@@ -83,12 +83,12 @@
                     android:id="@+id/iv_discover"
                     android:layout_width="36dp"
                     android:layout_height="36dp"
-                    android:src="@mipmap/discorver_default" />
+                    android:src="@mipmap/write_normal" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="发现"
+                    android:text="备忘"
                     android:textColor="#999" />
             </LinearLayout>
 
@@ -106,12 +106,12 @@
                     android:id="@+id/iv_my"
                     android:layout_width="36dp"
                     android:layout_height="36dp"
-                    android:src="@mipmap/my_default" />
+                    android:src="@mipmap/time_nomal" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="我的"
+                    android:text="足迹"
                     android:textColor="#999" />
             </LinearLayout>
 

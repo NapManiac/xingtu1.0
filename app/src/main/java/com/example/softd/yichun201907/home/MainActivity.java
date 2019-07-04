@@ -131,26 +131,26 @@ public class MainActivity extends BaseActivity {
         resetIcon();//重置所有图标为灰色
         switch (i) {
             case 0:
-                ivMessage.setImageResource(R.mipmap.message_color);
+                ivMessage.setImageResource(R.mipmap.task_selected);
                 break;
             case 1:
-                ivContact.setImageResource(R.mipmap.contact_color);
+                ivContact.setImageResource(R.mipmap.plant_selected);
                 break;
             case 2:
-                ivDiscover.setImageResource(R.mipmap.discorver_color);
+                ivDiscover.setImageResource(R.mipmap.write_selected);
                 break;
             case 3:
-                ivMy.setImageResource(R.mipmap.my_color);
+                ivMy.setImageResource(R.mipmap.time_selected);
                 break;
         }
     }
 
     //重置所有图标为灰色
     private void resetIcon() {
-        ivMessage.setImageResource(R.mipmap.message_default);
-        ivContact.setImageResource(R.mipmap.contact_default);
-        ivDiscover.setImageResource(R.mipmap.discorver_default);
-        ivMy.setImageResource(R.mipmap.my_default);
+        ivMessage.setImageResource(R.mipmap.task_nomal);
+        ivContact.setImageResource(R.mipmap.plant_nomal);
+        ivDiscover.setImageResource(R.mipmap.write_normal);
+        ivMy.setImageResource(R.mipmap.time_nomal);
     }
 
     @OnClick({R.id.ll_message, R.id.ll_contact, R.id.ll_discover, R.id.ll_my})

@@ -92,7 +92,7 @@
         android:scrollHorizontally="true"
         android:singleLine="true" />
 
-    <Button
+    <com.xuexiang.xui.widget.button.roundbutton.RoundButton
 
         android:id="@+id/bt_register"
         android:layout_width="match_parent"
@@ -100,6 +100,7 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginHorizontal="80dp"
         android:layout_marginTop="40dp"
+        style="@style/RoundButton.Green"
         android:background="@color/xui_btn_green_normal_color"
         android:text="注     册"
         android:textColor="@android:color/white"

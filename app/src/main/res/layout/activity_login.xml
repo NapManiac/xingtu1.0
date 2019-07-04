@@ -9,15 +9,24 @@
     <ImageView
         android:id="@+id/img"
         android:layout_width="match_parent"
-        android:layout_height="300dp"
+        android:layout_height="200dp"
         app:srcCompat="@mipmap/logo" />
 
-    <TextView
-        android:id="@+id/welcome_text"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:text="一起迎接 每一秒都在变好的你"
-        android:textAlignment="center" />
+    <android.support.v7.widget.AppCompatTextView
+        android:layout_width="wrap_content"
+        android:textStyle="bold"
+        android:layout_gravity="center"
+        android:text="星途"
+        android:textSize="36sp"
+        android:layout_marginBottom="30dp"
+        android:textColor="#E3DEFF"
+        android:layout_height="wrap_content" />
+
+    <com.xuexiang.xui.widget.textview.marqueen.MarqueeView
+        android:id="@+id/marquee_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"></com.xuexiang.xui.widget.textview.marqueen.MarqueeView>
 
     <LinearLayout
         android:id="@+id/name"
@@ -94,8 +103,9 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <Button
+        <com.xuexiang.xui.widget.button.roundbutton.RoundButton
             android:id="@+id/btn_login"
+            style="@style/RoundButton.Blue"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="50dp"

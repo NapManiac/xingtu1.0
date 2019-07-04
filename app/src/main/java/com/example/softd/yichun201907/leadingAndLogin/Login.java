@@ -1,28 +1,33 @@
 package com.example.softd.yichun201907.leadingAndLogin;
 
 import android.content.SharedPreferences;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.widget.AppCompatCheckBox;
 import android.support.v7.widget.AppCompatTextView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.example.softd.yichun201907.DB.Account;
 import com.example.softd.yichun201907.DB.UserInfo;
 import com.example.softd.yichun201907.R;
 import com.example.softd.yichun201907.base.BaseActivity;
 import com.example.softd.yichun201907.home.MainActivity;
+import com.xuexiang.xui.widget.textview.marqueen.MarqueeFactory;
+import com.xuexiang.xui.widget.textview.marqueen.MarqueeView;
+import com.xuexiang.xui.widget.textview.marqueen.SimpleNoticeMF;
 
 import org.litepal.LitePal;
-import org.litepal.tablemanager.Connector;
 
+import java.util.Arrays;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+
+import static com.xuexiang.xui.XUI.getContext;
 
 public class Login extends BaseActivity {
 
@@ -42,9 +47,13 @@ public class Login extends BaseActivity {
     Button btnLogin;
     @BindView(R.id.text_register)
     AppCompatTextView textRegister;
+    @BindView(R.id.marquee_view)
+    MarqueeView marqueeView;
 
     private SharedPreferences pref;
     private SharedPreferences.Editor editor;
+
+    final List<String> datas = Arrays.asList("千里之行", "始于足下", "绳锯木断", "水滴石穿");
 
 
     @Override
@@ -53,9 +62,8 @@ public class Login extends BaseActivity {
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
 
-//        dropTable();
-//        addAdmin();
-
+        dropTable();
+        addAdmin();
 
 
         pref = PreferenceManager.getDefaultSharedPreferences(this);
@@ -74,6 +82,19 @@ public class Login extends BaseActivity {
             toastLong("自动登陆");
             checkAuto.setChecked(true);
         }
+
+        //初始化滚动字幕条
+        MarqueeFactory<TextView, String> marqueeFactory1 = new SimpleNoticeMF(getContext());
+        marqueeView.setMarqueeFactory(marqueeFactory1);
+        marqueeView.startFlipping();
+        marqueeFactory1.setOnItemClickListener(new MarqueeFactory.OnItemClickListener<TextView, String>() {
+            @Override
+            public void onItemClickListener(MarqueeFactory.ViewHolder<TextView, String> holder) {
+                toastLong(holder.getData());
+            }
+        });
+        marqueeFactory1.setData(datas);
+
     }
 
     @Override
