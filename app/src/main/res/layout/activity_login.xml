@@ -7,19 +7,14 @@
     android:orientation="vertical">
 
     <ImageView
-        android:id="@+id/img"
+        android:id="@+id/im0g"
         android:layout_width="match_parent"
         android:layout_height="200dp"
         app:srcCompat="@mipmap/logo" />
 
-    <android.support.v7.widget.AppCompatTextView
-        android:layout_width="wrap_content"
-        android:textStyle="bold"
-        android:layout_gravity="center"
-        android:text="星途"
-        android:textSize="36sp"
-        android:layout_marginBottom="30dp"
-        android:textColor="#E3DEFF"
+    <ImageView
+        android:src="@mipmap/login_logo"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
     <com.xuexiang.xui.widget.textview.marqueen.MarqueeView

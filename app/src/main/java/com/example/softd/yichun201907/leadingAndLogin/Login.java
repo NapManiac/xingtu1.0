@@ -13,6 +13,7 @@ import com.example.softd.yichun201907.DB.Account;
 import com.example.softd.yichun201907.DB.UserInfo;
 import com.example.softd.yichun201907.R;
 import com.example.softd.yichun201907.base.BaseActivity;
+import com.example.softd.yichun201907.base.MyApp;
 import com.example.softd.yichun201907.home.MainActivity;
 import com.xuexiang.xui.widget.textview.marqueen.MarqueeFactory;
 import com.xuexiang.xui.widget.textview.marqueen.MarqueeView;
@@ -62,8 +63,8 @@ public class Login extends BaseActivity {
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
 
-        dropTable();
-        addAdmin();
+//        dropTable();
+//        addAdmin();
 
 
         pref = PreferenceManager.getDefaultSharedPreferences(this);
@@ -114,9 +115,9 @@ public class Login extends BaseActivity {
 
     @OnClick(R.id.btn_login)
     public void onViewClicked() {
-        String account = username.getText().toString();
+        String name = username.getText().toString();
         String password = userpassword.getText().toString();
-        int result = isLogin(account, password);
+        int result = isLogin(name, password);
         if (result == LOGIN_SUCCESS) {
             editor = pref.edit();
             if (checkRemerber.isChecked()) { // 检查复选框是否被选中
@@ -126,7 +127,7 @@ public class Login extends BaseActivity {
                 } else {
                     editor.putBoolean("auto_login", false);
                 }
-                editor.putString("account", account);
+                editor.putString("account", name);
                 editor.putString("password", password);
             } else {
                 editor.clear();
@@ -134,12 +135,21 @@ public class Login extends BaseActivity {
             editor.apply();
             goNextActivity(MainActivity.class);
             toastShort("登录成功");
+
+            initUserInfo(name);
             finish();
         } else if (result == LOGIN_PASSWORD_ERROR) {
             toastLong("用户名或密码错误");
         } else {
             toastLong("账号未注册");
         }
+    }
+    //初始化用户数据
+    private void initUserInfo(String name) {
+        UserInfo userInfo = LitePal.select("*")
+                .where("name = ?", name)
+                .find(UserInfo.class).get(0);
+        MyApp.setUserInfo(userInfo);
     }
 
     public int isLogin(String name, String password) {
@@ -177,7 +187,7 @@ public class Login extends BaseActivity {
         UserInfo userInfo = new UserInfo();
         userInfo.setName("111111");
         userInfo.setTel("15297828708");
-        userInfo.setEmail("1394327107@qq.com");
+        userInfo.setEmail("23333@qq.com");
         userInfo.save();
     }
 

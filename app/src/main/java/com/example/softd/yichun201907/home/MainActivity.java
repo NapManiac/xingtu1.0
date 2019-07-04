@@ -1,7 +1,10 @@
 package com.example.softd.yichun201907.home;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -11,9 +14,18 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.CircleCrop;
+import com.bumptech.glide.request.RequestOptions;
+import com.example.softd.yichun201907.DB.Account;
+import com.example.softd.yichun201907.DB.UserInfo;
 import com.example.softd.yichun201907.R;
 import com.example.softd.yichun201907.base.BaseActivity;
+import com.example.softd.yichun201907.base.MyApp;
+
+import org.litepal.LitePal;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,6 +58,12 @@ public class MainActivity extends BaseActivity {
     @BindView(R.id.drawer_layout)
     DrawerLayout drawerLayout;
     private List<Fragment> fragmentList = new ArrayList<>();
+
+    //修改头像图标
+    ImageView headImg;
+
+    //跳转选照片标识
+    public static final int SELECT_PHOTO_REQUEST_CODE = 1;
 
 
     @Override
@@ -102,7 +120,35 @@ public class MainActivity extends BaseActivity {
 
 
         //滑动菜单逻辑
+
+        View header = navView.getHeaderView(0);
+        TextView username = header.findViewById(R.id.tv_username);
+        TextView mail = header.findViewById(R.id.tv_mail);
+        //
+        headImg = header.findViewById(R.id.icon_image);
+
+        ImageView modifyHead = header.findViewById(R.id.iv_modify_head);
+
+        if (MyApp.getUserInfo().getHeadUri().equals("")) {
+            headImg.setImageResource(R.drawable.nav_icon);
+        } else {
+            headImg.setImageURI(Uri.parse(MyApp.getUserInfo().getHeadUri()));
+        }
+
+        username.setText(MyApp.getUserInfo().getName());
+        mail.setText(MyApp.getUserInfo().getEmail());
+        //修改头像
+        modifyHead.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(Intent.ACTION_PICK);
+                intent.setType("image/*");
+                startActivityForResult(intent, SELECT_PHOTO_REQUEST_CODE);
+            }
+        });
+
         navView.setCheckedItem(R.id.nav_call);
+
         navView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
@@ -176,5 +222,36 @@ public class MainActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         // TODO: add setContentView(...) invocation
         ButterKnife.bind(this);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == SELECT_PHOTO_REQUEST_CODE && resultCode == RESULT_OK){
+            Uri uriPicture = data.getData();
+            Glide.with(this)
+                    .load(uriPicture)
+                    .apply(RequestOptions.bitmapTransform(new CircleCrop()))
+                    .into(headImg);
+
+            log(uriPicture.toString());
+
+            MyApp.getUserInfo().setHeadUri(uriPicture.toString());
+
+            UserInfo userInfo = new UserInfo();
+            userInfo.setHeadUri(uriPicture.toString());
+            userInfo.updateAll("name = ?", MyApp.getUserInfo().getName());
+
+
+            UserInfo userInfo1 = LitePal.select("*")
+                    .where("name = ?", MyApp.getUserInfo().getName())
+                    .find(UserInfo.class).get(0);
+            if (!userInfo1.getHeadUri().equals("")) {
+                toastShort(userInfo1.getHeadUri());
+            } else {
+                toastShort("kong");
+                log(userInfo1.getEmail());
+            }
+        }
     }
 }

@@ -1,5 +1,7 @@
 package com.example.softd.yichun201907.DB;
 
+import android.net.Uri;
+
 import org.litepal.crud.LitePalSupport;
 
 public class UserInfo extends LitePalSupport {
@@ -9,6 +11,18 @@ public class UserInfo extends LitePalSupport {
     private String email = "";
 
     private String tel = "";
+
+    private String headUri = "";
+
+    public String getHeadUri() {
+        return headUri;
+    }
+
+    public void setHeadUri(String headUri) {
+        this.headUri = headUri;
+    }
+
+
 
     public String getName() {
         return name;

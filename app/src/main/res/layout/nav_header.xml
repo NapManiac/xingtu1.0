@@ -10,24 +10,29 @@
         android:id="@+id/icon_image"
         android:layout_width="70dp"
         android:layout_height="70dp"
-        android:src="@drawable/nav_icon"
         android:layout_centerInParent="true"/>
+
+    <ImageView
+        android:id="@+id/iv_modify_head"
+        android:layout_alignRight="@+id/icon_image"
+        android:layout_alignBottom="@+id/icon_image"
+        android:src="@drawable/ic_modify_head"
+        android:layout_width="15dp"
+        android:layout_height="15dp" />
     
     <TextView
-        android:id="@+id/mail"
+        android:id="@+id/tv_mail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:text="1394327107@qq.com"
         android:textColor="#FFF"
         android:textSize="14sp"/>
 
     <TextView
-        android:id="@+id/username"
+        android:id="@+id/tv_username"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@id/mail"
-        android:text="符凌云"
+        android:layout_above="@id/tv_mail"
         android:textColor="#FFF"
         android:textSize="14sp"/>
 
