@@ -63,8 +63,10 @@ public class Login extends BaseActivity {
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
 
-//        dropTable();
-//        addAdmin();
+
+        dropTable();
+        addAdmin();
+
 
 
         pref = PreferenceManager.getDefaultSharedPreferences(this);

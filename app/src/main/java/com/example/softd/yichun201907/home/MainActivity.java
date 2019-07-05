@@ -127,7 +127,7 @@ public class MainActivity extends BaseActivity {
         //
         headImg = header.findViewById(R.id.icon_image);
 
-        ImageView modifyHead = header.findViewById(R.id.iv_modify_head);
+        ImageView Head = header.findViewById(R.id.icon_image);
 
         if (MyApp.getUserInfo().getHeadUri().equals("")) {
             headImg.setImageResource(R.drawable.nav_icon);
@@ -138,12 +138,10 @@ public class MainActivity extends BaseActivity {
         username.setText(MyApp.getUserInfo().getName());
         mail.setText(MyApp.getUserInfo().getEmail());
         //修改头像
-        modifyHead.setOnClickListener(new View.OnClickListener() {
+        Head.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(Intent.ACTION_PICK);
-                intent.setType("image/*");
-                startActivityForResult(intent, SELECT_PHOTO_REQUEST_CODE);
+                goNextActivity(MyInfoActivity.class);
             }
         });
 
@@ -224,34 +222,4 @@ public class MainActivity extends BaseActivity {
         ButterKnife.bind(this);
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == SELECT_PHOTO_REQUEST_CODE && resultCode == RESULT_OK){
-            Uri uriPicture = data.getData();
-            Glide.with(this)
-                    .load(uriPicture)
-                    .apply(RequestOptions.bitmapTransform(new CircleCrop()))
-                    .into(headImg);
-
-            log(uriPicture.toString());
-
-            MyApp.getUserInfo().setHeadUri(uriPicture.toString());
-
-            UserInfo userInfo = new UserInfo();
-            userInfo.setHeadUri(uriPicture.toString());
-            userInfo.updateAll("name = ?", MyApp.getUserInfo().getName());
-
-
-            UserInfo userInfo1 = LitePal.select("*")
-                    .where("name = ?", MyApp.getUserInfo().getName())
-                    .find(UserInfo.class).get(0);
-            if (!userInfo1.getHeadUri().equals("")) {
-                toastShort(userInfo1.getHeadUri());
-            } else {
-                toastShort("kong");
-                log(userInfo1.getEmail());
-            }
-        }
-    }
 }

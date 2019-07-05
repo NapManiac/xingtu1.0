@@ -4,18 +4,11 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <com.xuexiang.xui.widget.edittext.materialedittext.MaterialEditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Floating Label"
-        app:met_floatingLabel="normal" />
 
-    <com.xuexiang.xui.widget.edittext.materialedittext.MaterialEditText
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_view"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Custom Floating Label Text"
-        app:met_floatingLabel="normal"
-        app:met_floatingLabelText="Label" />
+        android:layout_height="match_parent"/>
 
 
 

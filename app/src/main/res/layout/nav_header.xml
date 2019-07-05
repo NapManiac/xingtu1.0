@@ -6,20 +6,15 @@
     android:padding="10dp"
     android:background="#6cf">
 
+
+
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/icon_image"
         android:layout_width="70dp"
         android:layout_height="70dp"
-        android:layout_centerInParent="true"/>
+        android:layout_margin="10dp"
+        android:layout_marginStart="0dp" />
 
-    <ImageView
-        android:id="@+id/iv_modify_head"
-        android:layout_alignRight="@+id/icon_image"
-        android:layout_alignBottom="@+id/icon_image"
-        android:src="@drawable/ic_modify_head"
-        android:layout_width="15dp"
-        android:layout_height="15dp" />
-    
     <TextView
         android:id="@+id/tv_mail"
         android:layout_width="wrap_content"
@@ -35,5 +30,37 @@
         android:layout_above="@id/tv_mail"
         android:textColor="#FFF"
         android:textSize="14sp"/>
+
+    <TextView
+        android:drawableLeft="@mipmap/task_yes"
+        android:layout_margin="20dp"
+        android:id="@+id/tv_wancheng"
+        android:text=" 已完成：0"
+        android:layout_alignParentRight="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:layout_marginTop="30dp"
+        android:drawableLeft="@mipmap/task_no"
+        android:layout_marginRight="20dp"
+        android:id="@+id/tv_weiwancheng"
+        android:text=" 未完成：0"
+        android:layout_alignTop="@+id/tv_wancheng"
+        android:layout_alignParentRight="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:layout_marginTop="30dp"
+        android:drawableLeft="@mipmap/comp_rate"
+        android:layout_marginRight="20dp"
+        android:id="@+id/tv_wanchenglv"
+        android:text=" 完成率：0"
+        android:layout_alignTop="@+id/tv_weiwancheng"
+        android:layout_alignParentRight="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
 
 </RelativeLayout >
