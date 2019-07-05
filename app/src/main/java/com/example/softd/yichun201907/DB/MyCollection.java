@@ -1,6 +1,8 @@
 package com.example.softd.yichun201907.DB;
 
-public class MyCollection {
+import org.litepal.crud.LitePalSupport;
+
+public class MyCollection extends LitePalSupport {
     //用户名
     String name = "";
 

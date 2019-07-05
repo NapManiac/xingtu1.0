@@ -1,4 +1,4 @@
-package com.example.softd.yichun201907.leadingAndLogin;
+package com.example.softd.yichun201907.adapters;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.softd.yichun201907.DB.Event;
 import com.example.softd.yichun201907.R;
 import com.vivian.timelineitemdecoration.util.Util;
 
@@ -48,8 +49,8 @@ public class DotTimeLineAdapter extends RecyclerView.Adapter<DotTimeLineAdapter.
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.time.setText(Util.LongtoStringFormat(1000 * mList.get(position).getTime()));
-        holder.textView.setText(mList.get(position).getEvent());
+        holder.time.setText(Util.LongtoStringFormat(1000 * mList.get(position).getStartTime()));
+        holder.textView.setText(mList.get(position).getEventName());
         holder.time.setTextColor(colors[position % colors.length]);
     }
 

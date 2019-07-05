@@ -1,6 +1,8 @@
 package com.example.softd.yichun201907.DB;
 
-public class Entity {
+import org.litepal.crud.LitePalSupport;
+
+public class Entity extends LitePalSupport {
     //标识
     String idid = "";
     //标题

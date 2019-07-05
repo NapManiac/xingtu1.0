@@ -3,20 +3,20 @@ package com.example.softd.yichun201907.home;
 
 import android.app.Fragment;
 import android.graphics.Color;
-import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 
+import com.example.softd.yichun201907.DB.Event;
 import com.example.softd.yichun201907.R;
 import com.example.softd.yichun201907.base.BaseFragment;
-import com.example.softd.yichun201907.leadingAndLogin.DotTimeLineAdapter;
-import com.example.softd.yichun201907.leadingAndLogin.Event;
+import com.example.softd.yichun201907.adapters.DotTimeLineAdapter;
+import com.example.softd.yichun201907.base.MyApp;
 import com.vivian.timelineitemdecoration.itemdecoration.DotItemDecoration;
 import com.vivian.timelineitemdecoration.itemdecoration.SpanIndexListener;
+
+import org.litepal.LitePal;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,22 +32,7 @@ public class MyFragment extends BaseFragment {
     DotTimeLineAdapter mAdapter;
     DotItemDecoration mItemDecoration;
 
-    long[] times = {
-            1497229200,
-            1497240000,
-            1497243600,
-            1497247200,
-            1497249000,
-            1497252600
-    };
-    String[] events = new String[]{
-            "去小北门拿快递",
-            "跟同事一起聚餐",
-            "写文档",
-            "和产品开会",
-            "整理开会内容",
-            "提交代码到git上"
-    };
+
 
 
 
@@ -98,12 +83,13 @@ public class MyFragment extends BaseFragment {
         });
         mRecyclerView.addItemDecoration(mItemDecoration);
 
-        mList.clear();
-        for (int i = 0; i < times.length; i++) {
-            Event event = new Event();
-            event.setTime(times[i]);
-            event.setEvent(events[i]);
-            mList.add(event);
+        if (MyApp.getEvents() == null) {
+            mList = LitePal.select("*")
+                    .where("name = ?" , MyApp.getUserInfo().getName())
+                    .find(Event.class);
+            MyApp.setEvents(mList);
+        } else {
+            mList = MyApp.getEvents();
         }
 
         mAdapter = new DotTimeLineAdapter(this.getContext(), mList);

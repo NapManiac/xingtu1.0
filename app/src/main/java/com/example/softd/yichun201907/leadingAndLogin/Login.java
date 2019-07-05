@@ -10,6 +10,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.softd.yichun201907.DB.Account;
+import com.example.softd.yichun201907.DB.Event;
 import com.example.softd.yichun201907.DB.UserInfo;
 import com.example.softd.yichun201907.R;
 import com.example.softd.yichun201907.base.BaseActivity;
@@ -22,6 +23,7 @@ import com.xuexiang.xui.widget.textview.marqueen.SimpleNoticeMF;
 import org.litepal.LitePal;
 
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 import butterknife.BindView;
@@ -193,6 +195,33 @@ public class Login extends BaseActivity {
         userInfo.setTel("15297828708");
         userInfo.setEmail("23333@qq.com");
         userInfo.save();
+
+        Event event1 = new Event();
+        event1.setName("111111");
+        event1.setEventName("幸苦地指导各位组员");
+        event1.setStartTime(1497229200);
+        event1.setEndTime(1497240000);
+        event1.setStatus(Event.COMPLETE);
+        event1.save();
+
+        Event event2 = new Event();
+        event2.setName("111111");
+        event2.setEventName("幸苦地帮lxb改BUG");
+        event2.setStartTime(1497243600);
+        event2.setEndTime(1497247200);
+        event2.setStatus(Event.INCOMPLETE);
+        event2.save();
+
+        Event event3 = new Event();
+        event3.setName("111111");
+        event3.setEventName("答辩");
+        event3.setStartTime(1497249000);
+        event3.setEndTime(1497252600);
+        event3.setStatus(Event.NOT_START);
+        event3.save();
+
+
+
     }
 
 }

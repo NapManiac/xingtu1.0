@@ -2,6 +2,7 @@ package com.example.softd.yichun201907.base;
 
 
 import com.example.softd.yichun201907.DB.Entity;
+import com.example.softd.yichun201907.DB.Event;
 import com.example.softd.yichun201907.DB.UserInfo;
 import com.xuexiang.xui.XUI;
 
@@ -26,6 +27,18 @@ public class MyApp extends LitePalApplication {
     private static List<Entity> pastEntity = null;
     //收藏推文
     private static List<Entity> collectionEntity = null;
+
+    private static List<Event> events = null;
+
+    public static List<Event> getEvents() {
+        return events;
+    }
+
+    public static void setEvents(List<Event> events) {
+        MyApp.events = events;
+    }
+
+
 
     public static UserInfo getUserInfo() {
         return userInfo;
