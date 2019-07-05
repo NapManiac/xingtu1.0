@@ -11,6 +11,15 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
+        <com.xuexiang.xui.widget.actionbar.TitleBar
+            android:id="@+id/tt_main"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:background="@color/xui_config_color_titlebar"
+            app:tb_barHeight="65dp"
+            app:tb_leftImageResource="@drawable/xui_ic_return_back"
+            app:tb_leftText="回退"
+            app:tb_titleText="这是一个Title" />
 
         <android.support.v4.view.ViewPager
             android:id="@+id/vp_tab"

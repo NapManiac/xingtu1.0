@@ -3,14 +3,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/xui_btn_blue_normal_color"
    >
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:textSize="36sp"
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_view_timeline"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:text="足迹" />
+        android:layout_height="match_parent"/>
 
 </FrameLayout>
