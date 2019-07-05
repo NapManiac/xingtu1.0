@@ -64,8 +64,8 @@ public class Login extends BaseActivity {
         ButterKnife.bind(this);
 
 
-        dropTable();
-        addAdmin();
+//        dropTable();
+//        addAdmin();
 
 
 
@@ -99,6 +99,8 @@ public class Login extends BaseActivity {
         marqueeFactory1.setData(datas);
 
     }
+
+
 
     @Override
     public int initLayout() {

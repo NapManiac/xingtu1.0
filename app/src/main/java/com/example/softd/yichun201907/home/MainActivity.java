@@ -1,11 +1,14 @@
 package com.example.softd.yichun201907.home;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -62,8 +65,11 @@ public class MainActivity extends BaseActivity {
     //修改头像图标
     ImageView headImg;
 
+    View header;
+
     //跳转选照片标识
-    public static final int SELECT_PHOTO_REQUEST_CODE = 1;
+
+
 
 
     @Override
@@ -119,31 +125,18 @@ public class MainActivity extends BaseActivity {
         iconChange(0);//默认选中第一页（图标的变化）
 
 
-        //滑动菜单逻辑
 
-        View header = navView.getHeaderView(0);
-        TextView username = header.findViewById(R.id.tv_username);
-        TextView mail = header.findViewById(R.id.tv_mail);
-        //
-        headImg = header.findViewById(R.id.icon_image);
-
-        ImageView Head = header.findViewById(R.id.icon_image);
-
-        if (MyApp.getUserInfo().getHeadUri().equals("")) {
-            headImg.setImageResource(R.drawable.nav_icon);
-        } else {
-            headImg.setImageURI(Uri.parse(MyApp.getUserInfo().getHeadUri()));
-        }
-
-        username.setText(MyApp.getUserInfo().getName());
-        mail.setText(MyApp.getUserInfo().getEmail());
         //修改头像
-        Head.setOnClickListener(new View.OnClickListener() {
+        header = navView.getHeaderView(0);
+        headImg = header.findViewById(R.id.icon_image);
+        headImg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 goNextActivity(MyInfoActivity.class);
             }
         });
+
+        //滑动菜单逻辑
 
         navView.setCheckedItem(R.id.nav_call);
 
@@ -159,8 +152,30 @@ public class MainActivity extends BaseActivity {
     }
 
     @Override
-    public void initData() {
+    protected void onResume() {
+        super.onResume();
 
+        TextView username = header.findViewById(R.id.tv_username);
+        TextView mail = header.findViewById(R.id.tv_mail);
+        //
+
+
+
+
+        if (MyApp.getUserInfo().getHeadUri().equals("")) {
+            headImg.setImageResource(R.drawable.nav_icon);
+        } else {
+            headImg.setImageURI(Uri.parse(MyApp.getUserInfo().getHeadUri()));
+        }
+
+        username.setText(MyApp.getUserInfo().getName());
+        mail.setText(MyApp.getUserInfo().getEmail());
+
+
+    }
+
+    @Override
+    public void initData() {
     }
 
 
