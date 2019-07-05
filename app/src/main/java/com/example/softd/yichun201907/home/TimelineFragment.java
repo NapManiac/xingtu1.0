@@ -25,7 +25,7 @@ import java.util.List;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class MyFragment extends BaseFragment {
+public class TimelineFragment extends BaseFragment {
     RecyclerView mRecyclerView;
 
     List<Event> mList = new ArrayList<>();
@@ -36,13 +36,13 @@ public class MyFragment extends BaseFragment {
 
 
 
-    public MyFragment() {
+    public TimelineFragment() {
         // Required empty public constructor
     }
 
     @Override
     protected int initLayout() {
-        return R.layout.fragment_my;
+        return R.layout.fragment_timeline;
     }
 
     @Override

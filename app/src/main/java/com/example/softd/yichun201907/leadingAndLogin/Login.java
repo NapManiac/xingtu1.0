@@ -16,6 +16,7 @@ import com.example.softd.yichun201907.R;
 import com.example.softd.yichun201907.base.BaseActivity;
 import com.example.softd.yichun201907.base.MyApp;
 import com.example.softd.yichun201907.home.MainActivity;
+import com.xuexiang.xui.utils.StatusBarUtils;
 import com.xuexiang.xui.widget.textview.marqueen.MarqueeFactory;
 import com.xuexiang.xui.widget.textview.marqueen.MarqueeView;
 import com.xuexiang.xui.widget.textview.marqueen.SimpleNoticeMF;
@@ -62,9 +63,10 @@ public class Login extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //沉浸式状态栏
+        StatusBarUtils.translucent(this);
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
-
 
 //        dropTable();
 //        addAdmin();

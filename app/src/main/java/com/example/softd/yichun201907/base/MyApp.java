@@ -71,4 +71,12 @@ public class MyApp extends LitePalApplication {
     public static void setCollectionEntity(List<Entity> collectionEntity) {
         MyApp.collectionEntity = collectionEntity;
     }
+
+    public static void clearCache() {
+        setUserInfo(null);
+        setEvents(null);
+        setCollectionEntity(null);
+        setPastEntity(null);
+        setTodayEntity(null);
+    }
 }

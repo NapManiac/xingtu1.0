@@ -9,6 +9,7 @@ import com.example.softd.yichun201907.DB.UserInfo;
 import com.example.softd.yichun201907.R;
 import com.example.softd.yichun201907.base.BaseActivity;
 import com.example.softd.yichun201907.utils.RegexUtils;
+import com.xuexiang.xui.utils.StatusBarUtils;
 
 import org.litepal.LitePal;
 
@@ -31,21 +32,18 @@ public class Register extends BaseActivity {
     @BindView(R.id.bt_register)
     Button btRegister;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register);
-        ButterKnife.bind(this);
-    }
+
 
     @Override
     public int initLayout() {
-        return R.layout.activity_login;
+        return R.layout.activity_register;
     }
 
     @Override
     public void initView() {
-
+        //沉浸式状态栏
+        StatusBarUtils.translucent(this);
+        ButterKnife.bind(this);
     }
 
     @Override

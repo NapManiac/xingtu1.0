@@ -17,6 +17,7 @@ import com.example.softd.yichun201907.DB.UserInfo;
 import com.example.softd.yichun201907.R;
 import com.example.softd.yichun201907.base.BaseActivity;
 import com.example.softd.yichun201907.base.MyApp;
+import com.xuexiang.xui.utils.StatusBarUtils;
 
 import org.litepal.LitePal;
 
@@ -54,6 +55,8 @@ public class MyInfoActivity extends BaseActivity {
 
     @Override
     public void initView() {
+        //沉浸式状态栏
+        StatusBarUtils.translucent(this);
         ButterKnife.bind(this);
     }
 
@@ -62,6 +65,8 @@ public class MyInfoActivity extends BaseActivity {
         verifyStoragePermissions(MyInfoActivity.this);
         if (!MyApp.getUserInfo().getHeadUri().equals("")) {
             ivHead.setImageURI(Uri.parse(MyApp.getUserInfo().getHeadUri()));
+        } else {
+            ivHead.setImageResource(R.drawable.nav_icon);
         }
     }
 

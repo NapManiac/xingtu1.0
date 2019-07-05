@@ -1,14 +1,9 @@
 package com.example.softd.yichun201907.home;
 
-import android.app.Activity;
-import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -19,16 +14,11 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.resource.bitmap.CircleCrop;
-import com.bumptech.glide.request.RequestOptions;
-import com.example.softd.yichun201907.DB.Account;
-import com.example.softd.yichun201907.DB.UserInfo;
 import com.example.softd.yichun201907.R;
 import com.example.softd.yichun201907.base.BaseActivity;
 import com.example.softd.yichun201907.base.MyApp;
-
-import org.litepal.LitePal;
+import com.example.softd.yichun201907.leadingAndLogin.Login;
+import com.xuexiang.xui.utils.StatusBarUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -70,8 +60,6 @@ public class MainActivity extends BaseActivity {
     //跳转选照片标识
 
 
-
-
     @Override
     public int initLayout() {
         return R.layout.activity_main;
@@ -79,17 +67,18 @@ public class MainActivity extends BaseActivity {
 
     @Override
     public void initView() {
-
+        //沉浸式状态栏
+        StatusBarUtils.translucent(this);
         ButterKnife.bind(this);
 
-        HomeFragment messageFragment = new HomeFragment();
-        TypeFragment contactFragment = new TypeFragment();
-        CartFragment discoverFragment = new CartFragment();
-        MyFragment myFragment = new MyFragment();
+        TasksFragment messageFragment = new TasksFragment();
+        StarsFragment contactFragment = new StarsFragment();
+        NoteFragment discoverFragment = new NoteFragment();
+        TimelineFragment timelineFragment = new TimelineFragment();
         fragmentList.add(messageFragment);
         fragmentList.add(contactFragment);
         fragmentList.add(discoverFragment);
-        fragmentList.add(myFragment);
+        fragmentList.add(timelineFragment);
 
         //给viewPage设置适配器，将四个fragment设置给它
         vpTab.setAdapter(new FragmentPagerAdapter(getSupportFragmentManager()) {
@@ -125,7 +114,6 @@ public class MainActivity extends BaseActivity {
         iconChange(0);//默认选中第一页（图标的变化）
 
 
-
         //修改头像
         header = navView.getHeaderView(0);
         headImg = header.findViewById(R.id.icon_image);
@@ -138,14 +126,24 @@ public class MainActivity extends BaseActivity {
 
         //滑动菜单逻辑
 
-        navView.setCheckedItem(R.id.nav_call);
+        navView.setCheckedItem(R.id.it_call);
 
         navView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                switch (menuItem.getItemId()) {
+                    case R.id.it_exit:
+                        goNextActivity(Login.class);
+                        MyApp.clearCache();
+                        finish();
+                        break;
+                    default:
+                        break;
+                }
                 drawerLayout.closeDrawers();
                 return true;
             }
+
         });
 
 
@@ -158,8 +156,6 @@ public class MainActivity extends BaseActivity {
         TextView username = header.findViewById(R.id.tv_username);
         TextView mail = header.findViewById(R.id.tv_mail);
         //
-
-
 
 
         if (MyApp.getUserInfo().getHeadUri().equals("")) {
