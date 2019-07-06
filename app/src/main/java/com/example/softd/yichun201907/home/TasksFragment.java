@@ -4,9 +4,13 @@ package com.example.softd.yichun201907.home;
 import android.app.Fragment;
 import android.support.v4.view.ViewPager;
 
-import com.example.library.SimpleOverlayAdapter;
+import com.example.softd.yichun201907.DB.Event;
 import com.example.softd.yichun201907.R;
+import com.example.softd.yichun201907.adapters.MyOverlayAdapter;
 import com.example.softd.yichun201907.base.BaseFragment;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -14,6 +18,8 @@ import com.example.softd.yichun201907.base.BaseFragment;
  */
 public class TasksFragment extends BaseFragment {
     private ViewPager vp;
+    private List<Event> eventList = new ArrayList<Event>();
+
     private String[] imgUrls = new String[]{"https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=1638079650,2146947483&fm=27&gp=0.jpg"
             , "https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=1297505592,1789076279&fm=27&gp=0.jpg"
             , "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1556094815760&di=1abe539eb4691346c07dd44a6bba7383&imgtype=0&src=http%3A%2F%2Fpic.xoyo.com%2Fbbs%2F2010%2F11%2F30%2F10113010300bdf68f9f96b70e4.jpg"
@@ -38,9 +44,9 @@ public class TasksFragment extends BaseFragment {
 
     @Override
     protected void initData() {
-        vp = getContentView().findViewById(R.id.example_vp);
-        SimpleOverlayAdapter adapter = new SimpleOverlayAdapter(getContext());
-        adapter.setImgUrlsAndBindViewPager(vp, imgUrls, 5);
+        vp = getContentView().findViewById(R.id.vi_tasks);
+        MyOverlayAdapter adapter = new MyOverlayAdapter(getContext(),eventList);//传入事件列表，会根据当前事件选择是否显示在待办卡组
+        adapter.setImgUrlsAndBindViewPager(vp, imgUrls, 3);
         vp.setAdapter(adapter);
         vp.setCurrentItem(100000); //伪无限循环
     }

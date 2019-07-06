@@ -8,6 +8,8 @@ public class Event extends LitePalSupport {
 
     private String eventName = "";
 
+    private String title = "";
+
     private long startTime;
 
     private long endTime;
@@ -19,6 +21,14 @@ public class Event extends LitePalSupport {
     public static final int INCOMPLETE = 2;
 
     public static final int NOT_START = 3;
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
 
     public String getName() {
         return name;

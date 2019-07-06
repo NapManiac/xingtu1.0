@@ -1,5 +1,6 @@
 package com.example.softd.yichun201907.home;
 
+import android.content.DialogInterface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -8,6 +9,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.AlertDialog;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
@@ -26,6 +28,8 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+
+import static com.example.softd.yichun201907.base.ActivityCollector.finishAll;
 
 public class MainActivity extends BaseActivity {
     @BindView(R.id.vp_tab)
@@ -133,9 +137,28 @@ public class MainActivity extends BaseActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                 switch (menuItem.getItemId()) {
                     case R.id.it_exit:
-                        goNextActivity(Login.class);
-                        MyApp.clearCache();
-                        finish();
+                        AlertDialog.Builder dialog = new AlertDialog.Builder (MainActivity.
+                                this);
+                        dialog.setTitle("提示");
+                        dialog.setMessage("确定退出登录吗");
+                        dialog.setCancelable(false);
+                        dialog.setPositiveButton("确定", new DialogInterface.
+                                OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                goNextActivity(Login.class);
+                                MyApp.clearCache();
+                                finishAll();
+                            }
+                        });
+                        dialog.setNegativeButton("取消", new DialogInterface.
+                                OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                            }
+                        });
+                        dialog.show();
+
                         break;
                     default:
                         break;
