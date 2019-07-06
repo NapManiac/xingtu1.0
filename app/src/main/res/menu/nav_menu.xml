@@ -2,31 +2,31 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_call"
+            android:id="@+id/it_call"
             android:icon="@mipmap/like_icon"
             android:title="收藏" />
 
         <item
-            android:id="@+id/nav_friends"
+            android:id="@+id/it_friends"
             android:icon="@mipmap/settings_icon"
             android:title="设置" />
 
         <item
-            android:id="@+id/nav_location"
+            android:id="@+id/it_location"
             android:icon="@mipmap/id_icon"
             android:title="信息" />
 
         <item
-            android:id="@+id/nav_mail"
+            android:id="@+id/it_mail"
             android:icon="@mipmap/nav_mail"
             android:title="邮箱" />
 
         <item
-            android:id="@+id/nav_task"
+            android:id="@+id/it_task"
             android:icon="@mipmap/nav_task"
             android:title="待办" />
         <item
-            android:id="@+id/exit"
+            android:id="@+id/it_exit"
             android:icon="@mipmap/exit"
             android:title="退出登陆" />
 
