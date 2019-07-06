@@ -47,6 +47,7 @@ dependencies {
 
     implementation 'com.github.oneAcorn:OverlayCardViewPager:v1.0'
 
+    implementation 'com.afollestad.material-dialogs:core:0.9.6.0'
 
 
 }

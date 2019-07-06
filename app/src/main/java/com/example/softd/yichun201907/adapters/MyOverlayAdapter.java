@@ -13,6 +13,7 @@ import com.bumptech.glide.request.RequestOptions;
 import com.example.library.BaseOverlayPageAdapter;
 import com.example.softd.yichun201907.DB.Event;
 import com.example.softd.yichun201907.R;
+import com.vivian.timelineitemdecoration.util.Util;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,18 +23,8 @@ public class MyOverlayAdapter extends BaseOverlayPageAdapter {
     List<Event> taskList = new ArrayList<>();
     List<String> encoList = new ArrayList<>();
 
-    public MyOverlayAdapter(Context context) {
-        super(context, new RequestOptions().error(R.drawable.error).placeholder(R.drawable.placeholder));
-        mInflater = LayoutInflater.from(context);
-    }
 
-
-    public MyOverlayAdapter(Context context, RequestOptions imageOptions) {
-        super(context, imageOptions);
-        mInflater = LayoutInflater.from(context);
-    }
-
-    public MyOverlayAdapter(Context context, List<Event> taskList) {
+    public MyOverlayAdapter(Context context, List<Event> eventList) {
         super(context, new RequestOptions().error(R.drawable.error).placeholder(R.drawable.placeholder));
         mInflater = LayoutInflater.from(context);
         encoList.add("对待生命，你不妨大胆一点，\n" +
@@ -57,10 +48,12 @@ public class MyOverlayAdapter extends BaseOverlayPageAdapter {
                 "世界先爱了我，我不能不爱他。\n\n" +
                 "——维马丁《九月的早晨》");
 
-        for (int i = 0; i < taskList .size(); i++) {
-            Event e = taskList.get(i);
-            if(System.currentTimeMillis()/1000 > taskList.get(i).getEndTime())
-                this.taskList.add(e);
+
+
+        for (int i = 0; i < eventList .size(); i++) {
+            Event e = eventList.get(i);
+            if(System.currentTimeMillis()/1000 > eventList.get(i).getEndTime())
+                taskList.add(e);
         }
     }
     @Override
@@ -82,7 +75,6 @@ public class MyOverlayAdapter extends BaseOverlayPageAdapter {
 
         Event emptyEvent;
         if(taskList.size() == 0) {//若无待办
-            emptyEvent = new Event();
             taskName.setText("暂无待办");
             taskTodo.setText("禅定");
             s_time.setText("开始时间：--:--");
@@ -92,8 +84,8 @@ public class MyOverlayAdapter extends BaseOverlayPageAdapter {
         else {
             final int p = position % taskList.size();
             emptyEvent = taskList.get(p);
-            s_time.setText("开始时间："+emptyEvent.getStartTime());
-            e_time.setText("结束时间："+emptyEvent.getEndTime());
+            s_time.setText("开始时间："+ Util.LongtoStringFormat(1000*emptyEvent.getStartTime()));
+            e_time.setText("结束时间："+Util.LongtoStringFormat(1000*emptyEvent.getEndTime()));
             taskName.setText(emptyEvent.getTitle());
             taskTodo.setText(emptyEvent.getEventName());//要做的事情
             encorege.setText(encoList.get(p%encoList.size()));

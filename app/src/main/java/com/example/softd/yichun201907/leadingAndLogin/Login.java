@@ -68,8 +68,8 @@ public class Login extends BaseActivity {
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
 
-        //dropTable();
-        addAdmin();
+//        dropDB();
+//        addAdmin();
 
 
 
@@ -179,9 +179,8 @@ public class Login extends BaseActivity {
     }
 
     //删除所有数据
-    public void dropTable() {
-        LitePal.deleteAll(Account.class);
-        LitePal.deleteAll(UserInfo.class);
+    public void dropDB() {
+        LitePal.deleteDatabase("DB");
     }
 
     //添加管理员

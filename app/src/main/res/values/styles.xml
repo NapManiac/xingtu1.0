@@ -7,10 +7,7 @@
         <item name="colorPrimaryDark">#1cf</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:windowNoTitle">true</item>
-        <!-- 窗口透明的状态栏 -->
-        <item name="android:windowTranslucentStatus">true</item>
-        <!-- 窗口透明的导航栏 -->
-        <item name="android:windowTranslucentNavigation">true</item>
+
 
 
     </style>

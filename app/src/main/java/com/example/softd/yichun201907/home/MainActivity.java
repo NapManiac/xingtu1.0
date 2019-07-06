@@ -7,20 +7,25 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.AlertDialog;
+import android.support.v7.app.ActionBar;
+import android.support.v7.widget.Toolbar;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.softd.yichun201907.R;
 import com.example.softd.yichun201907.base.BaseActivity;
 import com.example.softd.yichun201907.base.MyApp;
 import com.example.softd.yichun201907.leadingAndLogin.Login;
 import com.xuexiang.xui.utils.StatusBarUtils;
+import com.xuexiang.xui.widget.dialog.DialogLoader;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -54,6 +59,8 @@ public class MainActivity extends BaseActivity {
     NavigationView navView;
     @BindView(R.id.drawer_layout)
     DrawerLayout drawerLayout;
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
     private List<Fragment> fragmentList = new ArrayList<>();
 
     //修改头像图标
@@ -61,7 +68,8 @@ public class MainActivity extends BaseActivity {
 
     View header;
 
-    //跳转选照片标识
+    //侧滑菜单按键
+    private DrawerLayout mDrawerLayout;
 
 
     @Override
@@ -74,6 +82,7 @@ public class MainActivity extends BaseActivity {
         //沉浸式状态栏
         StatusBarUtils.translucent(this);
         ButterKnife.bind(this);
+
 
         TasksFragment messageFragment = new TasksFragment();
         StarsFragment contactFragment = new StarsFragment();
@@ -136,30 +145,32 @@ public class MainActivity extends BaseActivity {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                 switch (menuItem.getItemId()) {
-                    case R.id.it_exit:
-                        AlertDialog.Builder dialog = new AlertDialog.Builder (MainActivity.
-                                this);
-                        dialog.setTitle("提示");
-                        dialog.setMessage("确定退出登录吗");
-                        dialog.setCancelable(false);
-                        dialog.setPositiveButton("确定", new DialogInterface.
-                                OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                goNextActivity(Login.class);
-                                MyApp.clearCache();
-                                finishAll();
-                            }
-                        });
-                        dialog.setNegativeButton("取消", new DialogInterface.
-                                OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                            }
-                        });
-                        dialog.show();
+                    case R.id.it_exit: {
+
+                        DialogLoader.getInstance().showConfirmDialog(
+                                MainActivity.this,
+                                "提示：退出登录",
+                                "是",
+                                new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        goNextActivity(Login.class);
+                                        MyApp.clearCache();
+                                        dialog.dismiss();
+                                        finishAll();
+                                    }
+                                },
+                                "否",
+                                new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        dialog.dismiss();
+                                    }
+                                }
+                        );
 
                         break;
+                    }
                     default:
                         break;
                 }
@@ -168,6 +179,16 @@ public class MainActivity extends BaseActivity {
             }
 
         });
+
+        toolbar.setTitle("待办");
+
+        setSupportActionBar(toolbar);
+        ActionBar actionBar = getSupportActionBar();
+        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+            actionBar.setHomeAsUpIndicator(R.drawable.ic_menu);
+        }
 
 
     }
@@ -209,15 +230,19 @@ public class MainActivity extends BaseActivity {
         resetIcon();//重置所有图标为灰色
         switch (i) {
             case 0:
+                toolbar.setTitle("待办");
                 ivMessage.setImageResource(R.mipmap.task_selected);
                 break;
             case 1:
+                toolbar.setTitle("拾星");
                 ivContact.setImageResource(R.mipmap.plant_selected);
                 break;
             case 2:
+                toolbar.setTitle("备忘");
                 ivDiscover.setImageResource(R.mipmap.write_selected);
                 break;
             case 3:
+                toolbar.setTitle("足迹");
                 ivMy.setImageResource(R.mipmap.time_selected);
                 break;
         }
@@ -254,6 +279,28 @@ public class MainActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         // TODO: add setContentView(...) invocation
         ButterKnife.bind(this);
+    }
+
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.toolbar, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.it_share:
+                StarsFragment starsFragment = (StarsFragment) fragmentList.get(1);
+                starsFragment.showSimpleBottomSheetGrid();
+                break;
+            case android.R.id.home:
+                mDrawerLayout.openDrawer(GravityCompat.START);
+                break;
+
+
+            default:
+        }
+        return true;
     }
 
 }
