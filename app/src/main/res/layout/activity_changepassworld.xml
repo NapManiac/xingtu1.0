@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/activity_register"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    android:orientation="vertical">
+    <LinearLayout
+        android:id="@+id/blank"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:background="@color/xui_btn_blue_select_color"
+        android:orientation="vertical"></LinearLayout>
+    <ImageView
+        android:id="@+id/iv_head"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="25dp"
+        android:src="@mipmap/account_gray" />
+
+    <TextView
+        android:id="@+id/tv_user_name"
+        android:layout_width="fill_parent"
+        android:layout_height="48dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginLeft="35dp"
+        android:layout_marginTop="35dp"
+        android:layout_marginRight="35dp"
+        android:drawableLeft="@android:drawable/ic_menu_myplaces"
+        android:drawablePadding="10dp"
+        android:gravity="center_vertical"
+        android:paddingLeft="8dp"
+        android:singleLine="true"
+        android:text="用户名"
+        android:textColor="#000000"
+        android:textColorHint="#a3a3a3"
+        android:textSize="14sp" />
+    <EditText
+        android:id="@+id/et_psw"
+        android:drawableLeft="@android:drawable/ic_lock_idle_lock"
+        android:layout_width="fill_parent"
+        android:layout_gravity="center_horizontal"
+        android:layout_height="48dp"
+        android:layout_marginLeft="35dp"
+        android:layout_marginRight="35dp"
+
+
+        android:drawablePadding="10dp"
+        android:hint="请输入您的旧密码"
+        android:inputType="textPassword"
+        android:paddingLeft="8dp"
+        android:singleLine="true"
+        android:textColor="#000000"
+        android:textColorHint="#a3a3a3"
+        android:textSize="14sp"/>
+    <EditText
+        android:id="@+id/et_psw_again"
+        android:drawableLeft="@android:drawable/ic_lock_idle_lock"
+        android:layout_width="fill_parent"
+        android:layout_height="48dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginLeft="35dp"
+        android:layout_marginRight="35dp"
+
+
+        android:drawablePadding="10dp"
+        android:hint="请输入您的新密码"
+        android:inputType="textPassword"
+        android:paddingLeft="8dp"
+        android:singleLine="true"
+        android:textColor="#000000"
+        android:textColorHint="#a3a3a3"
+        android:textSize="14sp"/>
+    <com.xuexiang.xui.widget.button.roundbutton.RoundButton
+        android:id="@+id/btn_sure"
+        android:layout_width="fill_parent"
+        android:layout_height="40dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginLeft="35dp"
+        android:layout_marginRight="35dp"
+        android:layout_marginTop="15dp"
+        style="@style/RoundButton.Blue"
+        android:text="确定"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="18sp"/>
+    <com.xuexiang.xui.widget.button.roundbutton.RoundButton
+        android:id="@+id/btn_cancel"
+        android:layout_width="fill_parent"
+        android:layout_height="40dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginLeft="35dp"
+        android:layout_marginRight="35dp"
+        android:layout_marginTop="15dp"
+        style="@style/RoundButton.Blue"
+        android:text="取消"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="18sp"/>
+
+</LinearLayout>

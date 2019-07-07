@@ -69,8 +69,8 @@ public class Login extends BaseActivity {
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
 
-//        dropDB();
-//        addAdmin();
+        dropDB();
+        addAdmin();
 
 
 
@@ -199,6 +199,7 @@ public class Login extends BaseActivity {
         userInfo.save();
 
         Event event1 = new Event();
+        event1.setTitle("指导组员");
         event1.setName("111111");
         event1.setEventName("幸苦地指导各位组员");
         event1.setStartTime(1497229200);
@@ -208,6 +209,7 @@ public class Login extends BaseActivity {
 
         Event event2 = new Event();
         event2.setName("111111");
+        event2.setTitle("写项目");
         event2.setEventName("幸苦地帮lxb改BUG");
         event2.setStartTime(1497243600);
         event2.setEndTime(1497247200);
@@ -215,6 +217,7 @@ public class Login extends BaseActivity {
         event2.save();
 
         Event event3 = new Event();
+        event3.setTitle("答辩");
         event3.setName("111111");
         event3.setEventName("答辩");
         event3.setStartTime(1497249000);
