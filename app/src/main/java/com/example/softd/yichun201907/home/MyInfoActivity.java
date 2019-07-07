@@ -7,7 +7,9 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
+import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.CircleCrop;
@@ -26,23 +28,28 @@ import static com.bumptech.glide.request.RequestOptions.bitmapTransform;
 
 public class MyInfoActivity extends BaseActivity {
 
-
-    @BindView(R.id.iv_head)
-    ImageView ivHead;
-
-
     public static final int SELECT_PHOTO_REQUEST_CODE = 1;
 
     //外存访问权限
     private static final int REQUEST_EXTERNAL_STORAGE = 1;
 
     private static String[] PERMISSIONS_STORAGE = {"android.permission.READ_EXTERNAL_STORAGE", "android.permission.WRITE_EXTERNAL_STORAGE"};
+
+    @BindView(R.id.iv_head)
+    ImageView ivHead;
     @BindView(R.id.iv_back)
     ImageView ivBack;
     @BindView(R.id.btn_changePass)
     RoundButton btnChangePass;
     @BindView(R.id.btn_changeInfo)
     RoundButton btnChangeInfo;
+    @BindView(R.id.et_username)
+    TextView etUsername;
+    @BindView(R.id.et_user_email)
+    TextView etUserEmail;
+    @BindView(R.id.et_user_tel)
+    TextView etUserTel;
+
 
     @OnClick(R.id.iv_head)
     public void onViewClicked() {
@@ -62,6 +69,16 @@ public class MyInfoActivity extends BaseActivity {
         //沉浸式状态栏
         StatusBarUtils.translucent(this);
         ButterKnife.bind(this);
+
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        etUsername.setText("  " + MyApp.getUserInfo().getName());
+        etUserEmail.setText("  " + MyApp.getUserInfo().getEmail());
+        etUserTel.setText("  " + MyApp.getUserInfo().getTel());
     }
 
     @Override
@@ -116,13 +133,16 @@ public class MyInfoActivity extends BaseActivity {
         ButterKnife.bind(this);
     }
 
-    @OnClick(R.id.btn_changePass)
-    public void onbtn_changePassViewClicked() {
-        goNextActivity(ChangePwActivity.class);
-    }
 
-    @OnClick(R.id.btn_changeInfo)
-    public void onbtn_changeInfoViewClicked() {
-        goNextActivity(ChangeInfoActivity.class);
+    @OnClick({R.id.btn_changeInfo, R.id.btn_changePass})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.btn_changeInfo:
+                goNextActivity(ChangeInfoActivity.class);
+                break;
+            case R.id.btn_changePass:
+                goNextActivity(ChangePwActivity.class);
+                break;
+        }
     }
 }

@@ -58,7 +58,7 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="175dp">
 
             <ImageView
                 android:id="@+id/iv_back"
@@ -182,7 +182,6 @@
         android:layout_marginTop="10dp"
         android:drawableLeft="@mipmap/usericon_reg"
         android:padding="8dp"
-        android:text="dosusang"
         android:textSize="16sp" />
 
     <LinearLayout
@@ -198,7 +197,6 @@
         android:layout_marginTop="10dp"
         android:padding="8dp"
         android:drawableLeft="@mipmap/nav_mail"
-        android:text="2501488984@qq.com"
         android:textSize="16sp" />
 
     <LinearLayout
@@ -214,7 +212,6 @@
         android:drawableLeft="@mipmap/nav_call"
         android:layout_marginTop="10dp"
         android:padding="8dp"
-        android:text="13879513250"
         android:textSize="16sp" />
 
     <LinearLayout

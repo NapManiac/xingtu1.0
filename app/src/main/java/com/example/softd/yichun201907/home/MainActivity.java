@@ -27,6 +27,8 @@ import com.example.softd.yichun201907.leadingAndLogin.Login;
 import com.xuexiang.xui.utils.StatusBarUtils;
 import com.xuexiang.xui.widget.dialog.DialogLoader;
 
+import org.litepal.LitePal;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -221,6 +223,12 @@ public class MainActivity extends BaseActivity {
 
     @Override
     public void initData() {
+        Entity today = LitePal.select("*")
+                .where("idid=?", "20190707")
+                .find(Entity.class).get(0);
+
+
+        MyApp.setTodayEntity(today);
     }
 
 
@@ -230,9 +238,7 @@ public class MainActivity extends BaseActivity {
         vpTab.setCurrentItem(i);//设置viewPage中选中哪一项
     }
 
-    public void debugCollection() {
 
-    }
 
 
 
@@ -326,21 +332,21 @@ public class MainActivity extends BaseActivity {
             case R.id.it_collection:
                 if (MyApp.getTodayEntity().getIsCollection() == 1) {
                     item.setIcon(R.drawable.ic_is_collection);
+                    toastShort("收藏成功");
                     Entity entity = new Entity();
                     entity.setIsCollection(2);
                     entity.updateAll("idid=?", MyApp.getTodayEntity().getIdid());
 
                     MyApp.getTodayEntity().setIsCollection(2);
-                    toastShort("取消收藏");
 
                 } else {
                     item.setIcon(R.drawable.ic_collection);
+                    toastShort("取消收藏");
                     Entity entity = new Entity();
                     entity.setIsCollection(1);
                     entity.updateAll("idid=?", MyApp.getTodayEntity().getIdid());
 
                     MyApp.getTodayEntity().setIsCollection(1);
-                    toastShort("收藏成功");
                 }
                 break;
             case android.R.id.home:

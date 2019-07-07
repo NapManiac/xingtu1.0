@@ -69,8 +69,8 @@ public class Login extends BaseActivity {
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
 
-        dropDB();
-        addAdmin();
+//        dropDB();
+//        addAdmin();
 
 
 

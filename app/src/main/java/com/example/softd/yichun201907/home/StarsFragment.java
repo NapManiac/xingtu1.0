@@ -62,12 +62,7 @@ public class StarsFragment extends BaseFragment {
     protected void initView() {
         unbinder = ButterKnife.bind(this, getContentView());
 
-        Entity today = LitePal.select("*")
-                .where("idid=?", "20190707")
-                .find(Entity.class).get(0);
 
-
-        MyApp.setTodayEntity(today);
 
 
 
