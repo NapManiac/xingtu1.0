@@ -8,16 +8,26 @@ public class Entity extends LitePalSupport {
     //标题
     String title = "";
     //图片地址
-    String imgUrl = "";
+    int imgUrl;
     //文章内容
     String content = "";
+    //是否被收藏
+    int isCollection;
 
-    public String getId() {
+    public int getIsCollection() {
+        return isCollection;
+    }
+
+    public void setIsCollection(int isCollection) {
+        this.isCollection = isCollection;
+    }
+
+    public String getIdid() {
         return idid;
     }
 
-    public void setId(String id) {
-        this.idid = id;
+    public void setIdid(String idid) {
+        this.idid = idid;
     }
 
     public String getTitle() {
@@ -28,11 +38,11 @@ public class Entity extends LitePalSupport {
         this.title = title;
     }
 
-    public String getImgUrl() {
+    public int getImgUrl() {
         return imgUrl;
     }
 
-    public void setImgUrl(String imgUrl) {
+    public void setImgUrl(int imgUrl) {
         this.imgUrl = imgUrl;
     }
 

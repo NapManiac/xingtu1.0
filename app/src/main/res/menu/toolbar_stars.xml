@@ -1,10 +1,9 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/it_share"
-        android:icon="@drawable/ic_share"
-
-        android:title="Backup"
+        android:id="@+id/it_collection"
+        android:icon="@drawable/ic_collection"
+        android:title="collection"
         app:showAsAction="always" />
 
 </menu>

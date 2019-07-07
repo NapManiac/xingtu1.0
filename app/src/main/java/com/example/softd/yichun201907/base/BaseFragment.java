@@ -33,6 +33,8 @@ public abstract class BaseFragment extends Fragment {
         return mContentView;
     }
 
+
+
     /**
      * 此方法用于返回Fragment设置ContentView的布局文件资源ID * * @return 布局文件资源ID
      */
