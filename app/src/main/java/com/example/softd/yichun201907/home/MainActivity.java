@@ -18,8 +18,8 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import com.example.softd.yichun201907.DB.Entity;
 import com.example.softd.yichun201907.R;
 import com.example.softd.yichun201907.base.BaseActivity;
 import com.example.softd.yichun201907.base.MyApp;
@@ -68,8 +68,13 @@ public class MainActivity extends BaseActivity {
 
     View header;
 
-    //侧滑菜单按键
-    private DrawerLayout mDrawerLayout;
+
+    public static MainActivity  mainActivity;
+
+    public MainActivity() {
+        mainActivity = this;
+    }
+
 
 
     @Override
@@ -117,6 +122,7 @@ public class MainActivity extends BaseActivity {
             @Override
             public void onPageSelected(int i) {//滑动到了哪一项
                 iconChange(i);//让图标跟随滑动变动
+                invalidateOptionsMenu();
             }
 
             @Override
@@ -184,7 +190,6 @@ public class MainActivity extends BaseActivity {
 
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
-        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
             actionBar.setHomeAsUpIndicator(R.drawable.ic_menu);
@@ -225,12 +230,19 @@ public class MainActivity extends BaseActivity {
         vpTab.setCurrentItem(i);//设置viewPage中选中哪一项
     }
 
+    public void debugCollection() {
+
+    }
+
+
+
     //处理图标的变化
     private void iconChange(int i) {
         resetIcon();//重置所有图标为灰色
         switch (i) {
             case 0:
                 toolbar.setTitle("待办");
+
                 ivMessage.setImageResource(R.mipmap.task_selected);
                 break;
             case 1:
@@ -280,23 +292,60 @@ public class MainActivity extends BaseActivity {
         // TODO: add setContentView(...) invocation
         ButterKnife.bind(this);
     }
-
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.toolbar, menu);
+        getMenuInflater().inflate(R.menu.toolbar_stars, menu);
+        switch (vpTab.getCurrentItem()) {
+            case 0:
+                menu.findItem(R.id.it_collection).setVisible(false);
+                break;
+            case 1:
+                menu.findItem(R.id.it_collection).setVisible(true);
+                if (MyApp.getTodayEntity().getIsCollection() == 2) {
+                    menu.findItem(R.id.it_collection).setIcon(R.drawable.ic_is_collection);
+                } else {
+                    menu.findItem(R.id.it_collection).setIcon(R.drawable.ic_collection);
+                }
+                break;
+
+            case 2:
+                menu.findItem(R.id.it_collection).setVisible(false);
+                break;
+            case 3:
+                menu.findItem(R.id.it_collection).setVisible(false);
+                break;
+        }
+
+
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.it_share:
-                StarsFragment starsFragment = (StarsFragment) fragmentList.get(1);
-                starsFragment.showSimpleBottomSheetGrid();
+            case R.id.it_collection:
+                if (MyApp.getTodayEntity().getIsCollection() == 1) {
+                    item.setIcon(R.drawable.ic_is_collection);
+                    Entity entity = new Entity();
+                    entity.setIsCollection(2);
+                    entity.updateAll("idid=?", MyApp.getTodayEntity().getIdid());
+
+                    MyApp.getTodayEntity().setIsCollection(2);
+                    toastShort("取消收藏");
+
+                } else {
+                    item.setIcon(R.drawable.ic_collection);
+                    Entity entity = new Entity();
+                    entity.setIsCollection(1);
+                    entity.updateAll("idid=?", MyApp.getTodayEntity().getIdid());
+
+                    MyApp.getTodayEntity().setIsCollection(1);
+                    toastShort("收藏成功");
+                }
                 break;
             case android.R.id.home:
-                mDrawerLayout.openDrawer(GravityCompat.START);
+                drawerLayout.openDrawer(GravityCompat.START);
                 break;
-
 
             default:
         }
