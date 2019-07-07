@@ -10,7 +10,7 @@
         android:id="@+id/blank"
         android:layout_width="match_parent"
         android:layout_height="35dp"
-        android:background="@color/xui_btn_blue_select_color"
+        android:background="#6cf"
         android:orientation="vertical"></LinearLayout>
 
     <LinearLayout
@@ -23,7 +23,7 @@
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/xui_btn_blue_select_color"
+            android:background="#6cf"
             android:padding="5dp">
 
             <TextView
