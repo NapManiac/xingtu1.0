@@ -7,23 +7,22 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.CircleCrop;
-import com.bumptech.glide.request.RequestOptions;
 import com.example.softd.yichun201907.DB.UserInfo;
 import com.example.softd.yichun201907.R;
 import com.example.softd.yichun201907.base.BaseActivity;
 import com.example.softd.yichun201907.base.MyApp;
 import com.xuexiang.xui.utils.StatusBarUtils;
-
-import org.litepal.LitePal;
+import com.xuexiang.xui.widget.button.roundbutton.RoundButton;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+
+import static com.bumptech.glide.request.RequestOptions.bitmapTransform;
 
 public class MyInfoActivity extends BaseActivity {
 
@@ -32,20 +31,25 @@ public class MyInfoActivity extends BaseActivity {
     ImageView ivHead;
 
 
-    public static final int SELECT_PHOTO_REQUEST_CODE=1;
+    public static final int SELECT_PHOTO_REQUEST_CODE = 1;
 
     //外存访问权限
     private static final int REQUEST_EXTERNAL_STORAGE = 1;
 
     private static String[] PERMISSIONS_STORAGE = {"android.permission.READ_EXTERNAL_STORAGE", "android.permission.WRITE_EXTERNAL_STORAGE"};
+    @BindView(R.id.iv_back)
+    ImageView ivBack;
+    @BindView(R.id.btn_changePass)
+    RoundButton btnChangePass;
+    @BindView(R.id.btn_changeInfo)
+    RoundButton btnChangeInfo;
 
     @OnClick(R.id.iv_head)
     public void onViewClicked() {
-        Intent intent=new Intent(Intent.ACTION_PICK);
+        Intent intent = new Intent(Intent.ACTION_PICK);
         intent.setType("image/*");
-        startActivityForResult(intent,SELECT_PHOTO_REQUEST_CODE);
+        startActivityForResult(intent, SELECT_PHOTO_REQUEST_CODE);
     }
-
 
 
     @Override
@@ -88,12 +92,14 @@ public class MyInfoActivity extends BaseActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == SELECT_PHOTO_REQUEST_CODE && resultCode == RESULT_OK){
-            Uri uriPicture=data.getData();
+        if (requestCode == SELECT_PHOTO_REQUEST_CODE && resultCode == RESULT_OK) {
+            Uri uriPicture = data.getData();
+
             Glide.with(this)
                     .load(uriPicture)
-                    .apply(RequestOptions.bitmapTransform(new CircleCrop()))
+                    .apply(bitmapTransform(new CircleCrop()))
                     .into(ivHead);
+
             MyApp.getUserInfo().setHeadUri(uriPicture.toString());
             UserInfo userInfo = new UserInfo();
             userInfo.setHeadUri(uriPicture.toString());
@@ -103,4 +109,20 @@ public class MyInfoActivity extends BaseActivity {
     }
 
 
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // TODO: add setContentView(...) invocation
+        ButterKnife.bind(this);
+    }
+
+    @OnClick(R.id.btn_changePass)
+    public void onbtn_changePassViewClicked() {
+        goNextActivity(ChangePwActivity.class);
+    }
+
+    @OnClick(R.id.btn_changeInfo)
+    public void onbtn_changeInfoViewClicked() {
+        goNextActivity(ChangeInfoActivity.class);
+    }
 }

@@ -58,12 +58,13 @@ public class TasksFragment extends BaseFragment {
         MyApp.setEvents(eventList);
 
         vp = getContentView().findViewById(R.id.vi_tasks);
+        eventList = LitePal.select("*")
+                .where("name = ?", MyApp.getUserInfo().getName())
+                .find(Event.class);
         MyOverlayAdapter adapter = new MyOverlayAdapter(getContext(),eventList);//传入事件列表，会根据当前事件选择是否显示在待办卡组
         adapter.setImgUrlsAndBindViewPager(vp, imgUrls, 3);
         vp.setAdapter(adapter);
         vp.setCurrentItem(100000); //伪无限循环
-
-
 
     }
 
