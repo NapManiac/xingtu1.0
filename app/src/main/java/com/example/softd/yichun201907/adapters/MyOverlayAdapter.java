@@ -2,7 +2,9 @@ package com.example.softd.yichun201907.adapters;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -13,6 +15,8 @@ import com.bumptech.glide.request.RequestOptions;
 import com.example.library.BaseOverlayPageAdapter;
 import com.example.softd.yichun201907.DB.Event;
 import com.example.softd.yichun201907.R;
+import com.example.softd.yichun201907.home.MainActivity;
+import com.example.softd.yichun201907.home.StarsFragment;
 import com.vivian.timelineitemdecoration.util.Util;
 
 import java.util.ArrayList;
@@ -22,6 +26,9 @@ public class MyOverlayAdapter extends BaseOverlayPageAdapter {
     private LayoutInflater mInflater;
     List<Event> taskList = new ArrayList<>();
     List<String> encoList = new ArrayList<>();
+
+    long down;
+    long up;
 
 
     public MyOverlayAdapter(Context context, List<Event> eventList) {
@@ -58,7 +65,7 @@ public class MyOverlayAdapter extends BaseOverlayPageAdapter {
     }
     @Override
     public Object instantiateItem(@NonNull ViewGroup container, int position) {
-        View view = itemView();//获取根视图
+        final View view = itemView();//获取根视图
         if (null == view) {
             throw new RuntimeException("you should set a item layout");
         }
@@ -91,6 +98,27 @@ public class MyOverlayAdapter extends BaseOverlayPageAdapter {
             encorege.setText(encoList.get(p%encoList.size()));
         }
 
+        view.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                switch (event.getAction()) {
+                    case MotionEvent.ACTION_DOWN:
+                        down = (int)event.getY();
+                        break;
+                    case MotionEvent.ACTION_UP:
+                        up = (int)event.getY();
+                        if(down-up>300) {
+                            StarsFragment starsFragment = (StarsFragment) MainActivity.mainActivity.fragmentList.get(1);
+                            starsFragment.showSimpleBottomSheetGrid();
+                        }
+                        break;
+
+
+                }
+                return true;
+            }
+        });
+
         container.addView(view);
         return view;
     }
@@ -99,5 +127,6 @@ public class MyOverlayAdapter extends BaseOverlayPageAdapter {
     protected View itemView() {
         return mInflater.inflate(R.layout.item_cardviewpage, null);
     }
+
 
 }

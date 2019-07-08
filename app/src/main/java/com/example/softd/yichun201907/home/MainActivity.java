@@ -63,7 +63,7 @@ public class MainActivity extends BaseActivity {
     DrawerLayout drawerLayout;
     @BindView(R.id.toolbar)
     Toolbar toolbar;
-    private List<Fragment> fragmentList = new ArrayList<>();
+    public List<Fragment> fragmentList = new ArrayList<>();
 
     //修改头像图标
     ImageView headImg;

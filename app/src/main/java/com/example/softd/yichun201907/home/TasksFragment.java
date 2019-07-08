@@ -2,11 +2,11 @@ package com.example.softd.yichun201907.home;
 
 
 import android.app.Fragment;
+import android.os.Bundle;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.widget.Toast;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import com.example.softd.yichun201907.DB.Event;
 import com.example.softd.yichun201907.R;
@@ -16,16 +16,26 @@ import com.example.softd.yichun201907.base.MyApp;
 
 import org.litepal.LitePal;
 
-import java.util.ArrayList;
 import java.util.List;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+import butterknife.Unbinder;
 
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class TasksFragment extends BaseFragment {
-    private ViewPager vp;
 
+
+    @BindView(R.id.vi_tasks)
+    ViewPager vp;
+
+
+
+    Unbinder unbinder;
     private String[] imgUrls = new String[]{"https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=1638079650,2146947483&fm=27&gp=0.jpg"
             , "https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=1297505592,1789076279&fm=27&gp=0.jpg"
             , "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1556094815760&di=1abe539eb4691346c07dd44a6bba7383&imgtype=0&src=http%3A%2F%2Fpic.xoyo.com%2Fbbs%2F2010%2F11%2F30%2F10113010300bdf68f9f96b70e4.jpg"
@@ -47,7 +57,6 @@ public class TasksFragment extends BaseFragment {
     protected void initView() {
 
 
-
     }
 
     @Override
@@ -61,11 +70,26 @@ public class TasksFragment extends BaseFragment {
         eventList = LitePal.select("*")
                 .where("name = ?", MyApp.getUserInfo().getName())
                 .find(Event.class);
-        MyOverlayAdapter adapter = new MyOverlayAdapter(getContext(),eventList);//传入事件列表，会根据当前事件选择是否显示在待办卡组
+        MyOverlayAdapter adapter = new MyOverlayAdapter(getContext(), eventList);//传入事件列表，会根据当前事件选择是否显示在待办卡组
         adapter.setImgUrlsAndBindViewPager(vp, imgUrls, 3);
+
         vp.setAdapter(adapter);
         vp.setCurrentItem(100000); //伪无限循环
 
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        // TODO: inflate a fragment view
+        View rootView = super.onCreateView(inflater, container, savedInstanceState);
+        unbinder = ButterKnife.bind(this, rootView);
+        return rootView;
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        unbinder.unbind();
     }
 
 }
