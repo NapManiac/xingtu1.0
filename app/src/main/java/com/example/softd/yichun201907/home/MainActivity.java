@@ -223,12 +223,21 @@ public class MainActivity extends BaseActivity {
 
     @Override
     public void initData() {
-        Entity today = LitePal.select("*")
+        Entity today = new Entity();
+        today.setIdid("20190707");
+        today.setTitle("你该努力了");
+        today.setIsCollection(0);
+        today.setContent("         放下你的浮躁，放下你的懒惰，放下你的三分钟热度，放空你禁不住诱惑的大脑，放开你容易被任何事物吸引的眼睛，放淡你什么都想聊两句八卦的嘴巴，静下心来好好做你该做的事，该好好努力了。\n         时间是最公平的，活一天就拥有24小时，差别只是珍惜。你若不相信努力和时光，时光一定第一个辜负你。有梦想就立刻行动，因为现在过的每一天，都是余生中最年轻的一天。");
+        today.setImgUrl(R.drawable.head);
+        today.save();
+
+
+        Entity temp = LitePal.select("*")
                 .where("idid=?", "20190707")
                 .find(Entity.class).get(0);
 
 
-        MyApp.setTodayEntity(today);
+        MyApp.setTodayEntity(temp);
     }
 
 
@@ -292,12 +301,7 @@ public class MainActivity extends BaseActivity {
         }
     }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
-        ButterKnife.bind(this);
-    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.toolbar_stars, menu);

@@ -71,8 +71,6 @@ public class StarsFragment extends BaseFragment {
             @Override
             public void onClick(View v) {
                 showSimpleBottomSheetGrid();
-
-
             }
         });
     }
