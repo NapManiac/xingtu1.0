@@ -3,6 +3,7 @@ package com.example.softd.yichun201907.home;
 
 import android.app.Fragment;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +14,8 @@ import com.example.softd.yichun201907.R;
 import com.example.softd.yichun201907.adapters.MyOverlayAdapter;
 import com.example.softd.yichun201907.base.BaseFragment;
 import com.example.softd.yichun201907.base.MyApp;
+import com.xuexiang.xui.widget.dialog.bottomsheet.BottomSheet;
+import com.xuexiang.xui.widget.dialog.bottomsheet.BottomSheetItemView;
 
 import org.litepal.LitePal;
 
@@ -34,8 +37,9 @@ public class TasksFragment extends BaseFragment {
     ViewPager vp;
 
 
-
     Unbinder unbinder;
+    @BindView(R.id.fab_add)
+    FloatingActionButton fabAdd;
     private String[] imgUrls = new String[]{"https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=1638079650,2146947483&fm=27&gp=0.jpg"
             , "https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=1297505592,1789076279&fm=27&gp=0.jpg"
             , "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1556094815760&di=1abe539eb4691346c07dd44a6bba7383&imgtype=0&src=http%3A%2F%2Fpic.xoyo.com%2Fbbs%2F2010%2F11%2F30%2F10113010300bdf68f9f96b70e4.jpg"
@@ -90,6 +94,11 @@ public class TasksFragment extends BaseFragment {
     public void onDestroyView() {
         super.onDestroyView();
         unbinder.unbind();
+    }
+
+    @OnClick(R.id.fab_add)
+    public void onViewClicked() {
+        goNextActivity(AddTaskActivity.class);
     }
 
 }

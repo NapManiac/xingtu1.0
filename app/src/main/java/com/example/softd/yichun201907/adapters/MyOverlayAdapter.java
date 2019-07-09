@@ -10,19 +10,36 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-
 import com.bumptech.glide.request.RequestOptions;
 import com.example.library.BaseOverlayPageAdapter;
 import com.example.softd.yichun201907.DB.Event;
 import com.example.softd.yichun201907.R;
 import com.example.softd.yichun201907.home.MainActivity;
 import com.example.softd.yichun201907.home.StarsFragment;
+import com.example.softd.yichun201907.home.TasksFragment;
 import com.vivian.timelineitemdecoration.util.Util;
+import com.xuexiang.xui.widget.dialog.bottomsheet.BottomSheet;
+import com.xuexiang.xui.widget.dialog.bottomsheet.BottomSheetItemView;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.OnClick;
+
 public class MyOverlayAdapter extends BaseOverlayPageAdapter {
+    @BindView(R.id.card_iv)
+    ImageView cardIv;
+    @BindView(R.id.it_taskname)
+    TextView itTaskname;
+    @BindView(R.id.it_taskTime_start)
+    TextView itTaskTimeStart;
+    @BindView(R.id.it_taskTime_end)
+    TextView itTaskTimeEnd;
+    @BindView(R.id.tv_taskname)
+    TextView tvTaskname;
+    @BindView(R.id.tv_excute)
+    TextView tvExcute;
     private LayoutInflater mInflater;
     List<Event> taskList = new ArrayList<>();
     List<String> encoList = new ArrayList<>();
@@ -56,13 +73,13 @@ public class MyOverlayAdapter extends BaseOverlayPageAdapter {
                 "——维马丁《九月的早晨》");
 
 
-
-        for (int i = 0; i < eventList .size(); i++) {
+        for (int i = 0; i < eventList.size(); i++) {
             Event e = eventList.get(i);
-            if(System.currentTimeMillis()/1000 > eventList.get(i).getEndTime())
+            if (System.currentTimeMillis() / 1000 > eventList.get(i).getEndTime())
                 taskList.add(e);
         }
     }
+
     @Override
     public Object instantiateItem(@NonNull ViewGroup container, int position) {
         final View view = itemView();//获取根视图
@@ -79,23 +96,21 @@ public class MyOverlayAdapter extends BaseOverlayPageAdapter {
         TextView taskName = view.findViewById(R.id.it_taskname);//对应Event的title
         TextView encorege = view.findViewById(R.id.tv_excute);
         TextView taskTodo = view.findViewById(R.id.tv_taskname);//要做的事
-
         Event emptyEvent;
-        if(taskList.size() == 0) {//若无待办
+        if (taskList.size() == 0) {//若无待办
             taskName.setText("暂无待办");
             taskTodo.setText("禅定");
             s_time.setText("开始时间：--:--");
             e_time.setText("结束时间：--:--");
             encorege.setText("星星那么多,为你而闪耀的\n总有那么几颗\n\n——dosusang");
-        }
-        else {
+        } else {
             final int p = position % taskList.size();
             emptyEvent = taskList.get(p);
-            s_time.setText("开始时间："+ Util.LongtoStringFormat(1000*emptyEvent.getStartTime()));
-            e_time.setText("结束时间："+Util.LongtoStringFormat(1000*emptyEvent.getEndTime()));
+            s_time.setText("开始时间：" + Util.LongtoStringFormat(1000 * emptyEvent.getStartTime()));
+            e_time.setText("结束时间：" + Util.LongtoStringFormat(1000 * emptyEvent.getEndTime()));
             taskName.setText(emptyEvent.getTitle());
             taskTodo.setText(emptyEvent.getEventName());//要做的事情
-            encorege.setText(encoList.get(p%encoList.size()));
+            encorege.setText(encoList.get(p % encoList.size()));
         }
 
         view.setOnTouchListener(new View.OnTouchListener() {
@@ -108,8 +123,7 @@ public class MyOverlayAdapter extends BaseOverlayPageAdapter {
                     case MotionEvent.ACTION_UP:
                         up = (int)event.getY();
                         if(down-up>300) {
-                            StarsFragment starsFragment = (StarsFragment) MainActivity.mainActivity.fragmentList.get(1);
-                            starsFragment.showSimpleBottomSheetGrid();
+
                         }
                         break;
 
@@ -127,6 +141,8 @@ public class MyOverlayAdapter extends BaseOverlayPageAdapter {
     protected View itemView() {
         return mInflater.inflate(R.layout.item_cardviewpage, null);
     }
+
+
 
 
 }

@@ -49,7 +49,7 @@ public class DotTimeLineAdapter extends RecyclerView.Adapter<DotTimeLineAdapter.
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.time.setText(Util.LongtoStringFormat(1000 * mList.get(position).getStartTime()));
+        holder.time.setText(Util.LongtoStringFormat(1000 * mList.get(position).getEndTime()));
         holder.textView.setText(mList.get(position).getEventName());
         holder.time.setTextColor(colors[position % colors.length]);
     }
